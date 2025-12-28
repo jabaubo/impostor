@@ -15,4 +15,6 @@
     <string name="no">No</string>
     <string name="ok">Ok</string>
     <string name="inserte_jugadores">Inserte los jugadores</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="ver_palabra">Ver palabra</string>
 </resources>

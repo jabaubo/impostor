@@ -67,16 +67,37 @@ public class ConfigFragment extends Fragment {
     public void actualizarPalabras() {
         String strPalabras = String.valueOf(etPalabras.getText());
         String[] listaPalabras = strPalabras.split("\n");
-        for (int i = 0; i < listaPalabras.length; i++) {
-            System.out.println(listaPalabras[i] + " " + listaPalabras[i].length());
+        if (listaPalabras.length <= 1){
+            AlertDialog adError = new AlertDialog.Builder(this.getContext())
+                    .setTitle("Error")
+                    .setMessage("No hay suficientes palabras")
+                    .setPositiveButton(R.string.ok, null)
+                    .create();
+            adError.show();
         }
-        controlador.insertarPalabras(listaPalabras);
-        AlertDialog alertDialog = new AlertDialog.Builder(this.getContext())
-                .setTitle("Palabras actualizadas")
-                .setMessage("Tu lista de palabras ha sido actualizada")
-                .setPositiveButton(R.string.ok, null)
-                .create();
-        alertDialog.show();
+        else {
+            AlertDialog adAvertencia = new AlertDialog.Builder(this.getContext())
+                    .setTitle("¿Quieres actualizar las palabras?")
+                    .setMessage("El resto de palabras serán borradas")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            for (int j = 0; j < listaPalabras.length; j++) {
+                                System.out.println(listaPalabras[j] + " " + listaPalabras[j].length());
+                            }
+                            controlador.insertarPalabras(listaPalabras);
+                            AlertDialog adCorrecto = new AlertDialog.Builder(getContext())
+                                    .setTitle("Palabras actualizadas")
+                                    .setMessage("Tu lista de palabras ha sido actualizada")
+                                    .setPositiveButton(R.string.ok, null)
+                                    .create();
+                            adCorrecto.show();
+                        }
+                    })
+                    .setNegativeButton(R.string.no,null)
+                    .create();
+            adAvertencia.show();
+        }
     }
 
     public void palabrasDefault() {

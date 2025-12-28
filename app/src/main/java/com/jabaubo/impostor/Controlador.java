@@ -25,20 +25,15 @@ public class Controlador extends SQLiteOpenHelper {
     public Controlador(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
-        System.out.println("papafrita");
-        palabrasPrueba();
-
-    }
-
-    public boolean databaseCargada(){
-        String query = "SELECT * FROM " +TABLE_NAME;
-        SQLiteDatabase db = this.getReadableDatabase();
-        if (db!= null){
-            Cursor cursor = db.rawQuery(query,null);
-            return cursor.getCount() > 0;
+        System.out.println("Controlador creado");
+        int nPalabras = wordCount();
+        System.out.printf("Cantidad palabras:%d\n",nPalabras);
+        if (nPalabras <= 1){
+            palabrasPrueba();
         }
-        return false;
+
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -47,9 +42,6 @@ public class Controlador extends SQLiteOpenHelper {
                 " ("+COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"+
                 COLUMN_WORD + " TEXT);" ;
         db.execSQL(query);
-        ContentValues cv = new ContentValues();
-        cv.put(COLUMN_WORD,"patata");
-        db.insert(TABLE_NAME,null,cv);
         System.out.println("DB Creada");
     }
 
@@ -78,25 +70,48 @@ public class Controlador extends SQLiteOpenHelper {
             SQLiteDatabase db = getWritableDatabase();
             db.delete(TABLE_NAME,null,null);
             // Palabras a insertar
-            String[] palabras = {"gato", "perro", "casa", "árbol", "sol"};
-            for (String palabra : palabras) {
+        String[] palabras = {
+                "gato", "perro", "casa", "árbol", "sol",
+                "coche", "moto", "móvil", "fiesta",
+                "música", "playa", "calle", "noche", "día",
+                "verano", "invierno", "fútbol", "tapa", "cerveza",
+                "café", "estudio", "clase", "profe", "examen",
+                "curro", "dinero", "euro", "tienda", "centro",
+                "barrio", "piso", "cuarto", "cama", "sofá",
+                "tele", "serie", "peli", "videojuego", "consola",
+                "internet", "wifi", "red", "foto", "vídeo",
+                "chat", "mensaje", "grupo", "amiga",
+                "gente", "plan", "viaje", "tren", "bus",
+                "bici", "paseo", "parque", "río", "puente",
+                "plaza", "bar", "terraza", "discoteca", "copa",
+                "botellón", "quedada", "meme", "risa",
+                "moda", "ropa", "zapatillas", "sudadera", "chaqueta",
+                "mochila", "libro", "apuntes", "biblioteca", "practica",
+                "viernes", "sábado", "domingo", "semana", "tiempo",
+                "calor", "frío", "lluvia", "viento", "selfie",
+                "playlist", "concierto", "feria", "mayo", "abril",
+                "like",
+
+                "Picasso", "Bad bunny", "Santiago Segura", "Donald Trump", "Jordi Wild",
+                "Rosalia", "Aitana", "Manolo el del bombo", "Pablo Motos", "Messi",
+                "Cristiano Ronaldo", "Rafa Nadal", "Felipe VI", "Illojuan", "Diego Armando Maradona",
+                "Auron Play", "Ibai", "ElRubius", "Antonio Lobato", "Fernando Tejero"
+        };            for (String palabra : palabras) {
                 ContentValues values = new ContentValues();
                 values.put(COLUMN_WORD, palabra); // Cambia el nombre de la columna según tu tabla
                 db.insert(TABLE_NAME, null, values);
-                System.out.println("Insertando patata");
             }
     }
 
     public String elegirPalabra(){
 
         SQLiteDatabase db = getReadableDatabase();
-        System.out.println("Eligiendo palabra");
         Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null,null,null);
-        System.out.println("Kaboom");
         cursor.moveToFirst();
         cursor.moveToPosition((int)(Math.random()*cursor.getCount()));
         String palabra=cursor.getString(1);
-        //cursor.close();
+        System.out.printf("La palabra es %s\n",palabra);
+        cursor.close();
         return palabra;
     }
 

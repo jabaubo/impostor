@@ -2,16 +2,16 @@ package com.jabaubo.impostor.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.jabaubo.impostor.Controlador;
 import com.jabaubo.impostor.MainActivity;
@@ -24,9 +24,9 @@ public class HomeFragment extends Fragment {
     private Controlador controlador;
     private Button btSiguienteJugador;
     private Button btIniciarPartida;
+    private Button btPruebas;
     private TextView tvPalabra;
     private TextView tvJugador;
-    private Switch swVisibilidad;
     private EditText etJugadores;
     private String palabra;
     private int nJugadores;
@@ -43,9 +43,8 @@ public class HomeFragment extends Fragment {
         btIniciarPartida= root.findViewById(R.id.btIniciar) ;
         tvPalabra= root.findViewById(R.id.tvPalabra) ;
         tvJugador= root.findViewById(R.id.tvJugador) ;
-        swVisibilidad= root.findViewById(R.id.swVisibilidad) ;
         etJugadores = root.findViewById(R.id.etJugadores);
-
+        btPruebas = root.findViewById(R.id.btVerPalabra);
         btIniciarPartida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,32 +55,49 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 jugadorActual++;
-                swVisibilidad.setChecked(false);
                 tvPalabra.setText("¿Palabra?");
                 cargarJugador();
             }
         });
-        swVisibilidad.setOnClickListener(new View.OnClickListener() {
+
+        btSiguienteJugador.setEnabled(false);
+        btPruebas.setEnabled(false);
+        btPruebas.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                clickSwitch();
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                    touchBtVerPalabra(motionEvent);
+                return false;
             }
         });
-        btSiguienteJugador.setEnabled(false);
-        swVisibilidad.setEnabled(false);
         return root;
 
     }
     public void inciarPartida(){
-        palabra = controlador.elegirPalabra();
-        nJugadores = Integer.valueOf(etJugadores.getText().toString());
-        impostor = (int) (Math.random()*nJugadores);
-        System.out.println("El impostor es "+ impostor);
-        jugadorActual = 0;
-        swVisibilidad.setEnabled(true);
-        swVisibilidad.setChecked(false);
-        clickSwitch();
-        cargarJugador();
+        try {
+            nJugadores = Integer.valueOf(etJugadores.getText().toString());
+            if (nJugadores<= 2){
+                AlertDialog adError = new AlertDialog.Builder(this.getContext())
+                        .setTitle("Error")
+                        .setMessage("No hay suficientes jugadores")
+                        .setPositiveButton(R.string.ok, null)
+                        .create();
+                adError.show();
+            }
+            else{
+                palabra = controlador.elegirPalabra();
+                impostor = (int) (Math.random()*nJugadores);
+                jugadorActual = 0;
+                cargarJugador();
+            }
+        }catch (NumberFormatException e){
+            AlertDialog adError = new AlertDialog.Builder(this.getContext())
+                    .setTitle("Error")
+                    .setMessage("Cantidad de jugadores no válida")
+                    .setPositiveButton(R.string.ok, null)
+                    .create();
+            adError.show();
+        }
+
 
     }
     @Override
@@ -92,9 +108,11 @@ public class HomeFragment extends Fragment {
     private void cargarJugador(){
         tvJugador.setText("Jugador "+(jugadorActual+1));
         btSiguienteJugador.setEnabled(jugadorActual!=(nJugadores-1));
+        btPruebas.setEnabled(true);
     }
-    private void clickSwitch(){
-        if (swVisibilidad.isChecked()){
+
+    private void touchBtVerPalabra(MotionEvent motionEvent){
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
             if (jugadorActual == impostor){
                 tvPalabra.setText("Impostor");
             }
@@ -102,9 +120,8 @@ public class HomeFragment extends Fragment {
                 tvPalabra.setText(palabra);
             }
         }
-        else {
+        else{
             tvPalabra.setText("¿Palabra?");
         }
     }
-
 }
