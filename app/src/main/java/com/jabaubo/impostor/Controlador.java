@@ -26,7 +26,7 @@ public class Controlador extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
         System.out.println("Controlador creado");
-        int nPalabras = wordCount();
+        int nPalabras = wordCountDB();
         System.out.printf("Cantidad palabras:%d\n",nPalabras);
         if (nPalabras <= 1){
             palabrasPrueba();
@@ -115,7 +115,7 @@ public class Controlador extends SQLiteOpenHelper {
         return palabra;
     }
 
-    public int wordCount(){
+    public int wordCountDB(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME,null,null,null,null,null,null,null);
         int wordcount =cursor.getCount();

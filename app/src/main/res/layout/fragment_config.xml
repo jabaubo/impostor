@@ -7,10 +7,13 @@
     tools:context=".ui.gallery.GalleryFragment">
 
     <ScrollView
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btGuardar"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btReset"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPalabrasActuales">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,12 +23,11 @@
             <EditText
                 android:id="@+id/etPalabras"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:ems="10"
                 android:gravity="start"
                 android:inputType="textMultiLine"
-                android:lines="22"
-                android:text="Name\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName" />
+                android:text="Name\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nNamev\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName\nName" />
         </LinearLayout>
     </ScrollView>
 
@@ -33,6 +35,8 @@
         android:id="@+id/btGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Actualizar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -41,8 +45,70 @@
         android:id="@+id/btReset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Reiniciar palabras"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvPalabrasGuardadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:autoText="false"
+        android:text="@string/palabras_guardadas"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPalabrasActuales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:autoText="false"
+        android:text="@string/palabras_actuales"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPalabrasGuardadas" />
+
+    <TextView
+        android:id="@+id/tvNPalabrasGuardadas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:autoText="false"
+        android:text="@string/error"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPalabrasGuardadas" />
+
+    <TextView
+        android:id="@+id/tvNPalabrasActuales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:autoText="false"
+        android:text="@string/error"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPalabrasActuales" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

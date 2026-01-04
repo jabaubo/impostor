@@ -17,25 +17,31 @@ import com.jabaubo.impostor.Controlador;
 import com.jabaubo.impostor.MainActivity;
 import com.jabaubo.impostor.R;
 import com.jabaubo.impostor.databinding.FragmentHomeBinding;
+import com.jabaubo.impostor.ui.dialogs.nImpostorDialog;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private Controlador controlador;
+
     private Button btSiguienteJugador;
     private Button btIniciarPartida;
-    private Button btPruebas;
+    private Button btVerPalabra;
     private TextView tvPalabra;
     private TextView tvJugador;
+    private TextView tvJugadorInicial;
     private EditText etJugadores;
+
     private String palabra;
     private int nJugadores;
     private int jugadorActual;
-    private int impostor;
+    private int jugadorInicial;
+    private int[] listaImpostores = new int[1];
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
+        listaImpostores[0] = 267;
         controlador = ((MainActivity) getActivity()).getControlador();
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -43,8 +49,9 @@ public class HomeFragment extends Fragment {
         btIniciarPartida= root.findViewById(R.id.btIniciar) ;
         tvPalabra= root.findViewById(R.id.tvPalabra) ;
         tvJugador= root.findViewById(R.id.tvJugador) ;
+        tvJugadorInicial = root.findViewById(R.id.tvJugadorInicial);
         etJugadores = root.findViewById(R.id.etJugadores);
-        btPruebas = root.findViewById(R.id.btVerPalabra);
+        btVerPalabra = root.findViewById(R.id.btVerPalabra);
         btIniciarPartida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,8 +68,8 @@ public class HomeFragment extends Fragment {
         });
 
         btSiguienteJugador.setEnabled(false);
-        btPruebas.setEnabled(false);
-        btPruebas.setOnTouchListener(new View.OnTouchListener() {
+        btVerPalabra.setEnabled(false);
+        btVerPalabra.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                     touchBtVerPalabra(motionEvent);
@@ -84,8 +91,11 @@ public class HomeFragment extends Fragment {
                 adError.show();
             }
             else{
+                nImpostorDialog nImpostorDialog = new nImpostorDialog(nJugadores,this);
+                nImpostorDialog.show(getParentFragmentManager(),null);
+                System.out.println("Inciamos partida");
                 palabra = controlador.elegirPalabra();
-                impostor = (int) (Math.random()*nJugadores);
+                jugadorInicial = (int) (Math.random()*nJugadores);
                 jugadorActual = 0;
                 cargarJugador();
             }
@@ -107,13 +117,26 @@ public class HomeFragment extends Fragment {
     }
     private void cargarJugador(){
         tvJugador.setText("Jugador "+(jugadorActual+1));
-        btSiguienteJugador.setEnabled(jugadorActual!=(nJugadores-1));
-        btPruebas.setEnabled(true);
+        boolean ultimoJugador = jugadorActual==(nJugadores-1);
+        btSiguienteJugador.setEnabled(!ultimoJugador);
+        if (ultimoJugador) {
+            tvJugadorInicial.setText(String.format("Empieza el jugador %d",(jugadorInicial+1)));
+        }
+        btVerPalabra.setEnabled(true);
     }
 
     private void touchBtVerPalabra(MotionEvent motionEvent){
         if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
-            if (jugadorActual == impostor){
+            boolean isImpostor = false;
+            for (int i = 0; i < listaImpostores.length; i++) {
+                System.out.printf("%d %d %b\n",jugadorActual,listaImpostores[i],jugadorActual == listaImpostores[i]);
+                if (jugadorActual == listaImpostores[i]){
+                    System.out.println("Salto");
+                    isImpostor=true;
+                    break;
+                }
+            }
+            if (isImpostor){
                 tvPalabra.setText("Impostor");
             }
             else {
@@ -123,5 +146,13 @@ public class HomeFragment extends Fragment {
         else{
             tvPalabra.setText("¿Palabra?");
         }
+    }
+
+    public int[] getListaImpostores() {
+        return listaImpostores;
+    }
+
+    public void setListaImpostores(int[] listaImpostores) {
+        this.listaImpostores = listaImpostores;
     }
 }

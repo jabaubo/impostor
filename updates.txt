@@ -1,0 +1,7 @@
+v1.26.0401
+Se ha añadido lo siguiente: 
+	-Selector de cantidad de impostores.
+	-Selección aleatoria del jugador inicial
+	-Contador de palabras actuales en configuración
+	-Contador de palabras actuales en la base de datos
+
