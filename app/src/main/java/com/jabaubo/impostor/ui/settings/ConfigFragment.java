@@ -37,7 +37,6 @@ public class ConfigFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
         binding = FragmentConfigBinding.inflate(inflater, container, false);
 
         View root = binding.getRoot();
@@ -75,9 +74,16 @@ public class ConfigFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
+                System.out.println("creo q peta aqui");
+                System.out.println(etPalabras.getLineCount());
+                System.out.println(textLines);
+                System.out.println("k1");
                 if (etPalabras.getLineCount()!=textLines){
+                    System.out.println("k2");
                     String strPalabras = String.valueOf(etPalabras.getText());
+                    System.out.println("k3");
                     String[] listaPalabras = strPalabras.split("\n");
+                    System.out.println("k4");
                     if (listaPalabras.length > 1){
                         tvPalabrasActuales.setText(String.valueOf(listaPalabras.length));
                     }

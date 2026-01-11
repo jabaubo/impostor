@@ -1,3 +1,10 @@
+v1.26.01.11
+Se ha modificado lo siguiente:
+	-Esquema de colores de la interfaz
+
+Se ha corregido lo siguiente:
+	-En algunos dispositivos no se detectaba correctamente la pulsación para ver la palabra
+
 v1.26.0401
 Se ha añadido lo siguiente: 
 	-Selector de cantidad de impostores.

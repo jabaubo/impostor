@@ -6,6 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
+        style="@style/txtStyle"
         android:id="@+id/tvJugadores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -13,13 +14,13 @@
         android:autoText="false"
         android:text="@string/n_jugadores"
         android:textAllCaps="true"
-        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        style="@style/txtStyle"
         android:id="@+id/tvImpostores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,13 +28,13 @@
         android:autoText="false"
         android:text="@string/n_impostor"
         android:textAllCaps="true"
-        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvJugadores" />
 
     <SeekBar
+        style="@style/sbStyle"
         android:id="@+id/sbNImpostores"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvImpostores" />
 
     <TextView
+        style="@style/txtStyle"
         android:id="@+id/tvNJugadores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +56,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
+        style="@style/txtStyle"
         android:id="@+id/tvNImpostores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.jabaubo.impostor.ui.home;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -126,7 +127,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void touchBtVerPalabra(MotionEvent motionEvent){
-        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+        System.out.println(motionEvent.getAction());
+        if (motionEvent.getAction() == MotionEvent.ACTION_DOWN | motionEvent.getAction() == MotionEvent.ACTION_MOVE){
             boolean isImpostor = false;
             for (int i = 0; i < listaImpostores.length; i++) {
                 System.out.printf("%d %d %b\n",jugadorActual,listaImpostores[i],jugadorActual == listaImpostores[i]);

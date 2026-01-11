@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
     tools:context=".ui.home.HomeFragment">
 
     <androidx.cardview.widget.CardView
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#FFFFFF"
-        app:cardElevation="6dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/etJugadores"
         app:layout_constraintStart_toStartOf="@+id/textView3"
@@ -24,6 +23,7 @@
             android:layout_height="271dp">
 
             <TextView
+                style="@style/txtStyleJugadores"
                 android:id="@+id/tvJugador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -31,19 +31,18 @@
                 android:freezesText="false"
                 android:text="Inserte los jugadores"
                 android:textAlignment="center"
-                android:textColor="#333333"
                 android:textSize="34sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
 
             <TextView
+                style="@style/txtStyleJugadores"
                 android:id="@+id/tvPalabra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 android:text="¿Palabra?"
                 android:textSize="24sp"
-                android:textColor="#555555"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,13 +50,12 @@
                 app:layout_constraintVertical_bias="0.217" />
 
             <Button
+                style="@style/btnStyle"
                 android:id="@+id/btSiguienteJugador"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="Siguiente"
-                android:backgroundTint="#6200EE"
-                android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvPalabra"
@@ -65,11 +63,10 @@
 
             <Button
                 android:id="@+id/btVerPalabra"
+                style="@style/btnStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ver palabra"
-                android:backgroundTint="#6200EE"
-                android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="@+id/btSiguienteJugador"
                 app:layout_constraintEnd_toEndOf="@+id/btSiguienteJugador"
                 app:layout_constraintHorizontal_bias="0.068"
@@ -81,49 +78,48 @@
 
     <EditText
         android:id="@+id/etJugadores"
-        android:layout_width="wrap_content"
+        style="@style/txtStyle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:inputType="number"
-        android:textColor="#333333"
-        android:backgroundTint="#6200EE"
+        app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toEndOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintVertical_bias="0.333" />
 
     <TextView
         android:id="@+id/textView3"
+        style="@style/txtStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:text="Jugadores:"
         android:textSize="24sp"
-        android:textColor="#555555"
-        app:layout_constraintBottom_toBottomOf="@+id/etJugadores"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etJugadores"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        style="@style/btnStyle"
         android:id="@+id/btIniciar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:text="Iniciar"
-        android:backgroundTint="#6200EE"
-        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/etJugadores"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/etJugadores" />
 
     <TextView
+        style="@style/txtStyle"
         android:id="@+id/tvJugadorInicial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:textColor="#555555"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="@+id/btIniciar"
         app:layout_constraintStart_toStartOf="@+id/btIniciar"

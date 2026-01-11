@@ -2,15 +2,44 @@
     <!-- Base application theme. -->
     <style name="Theme.Impostor" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimary">@color/button_bg_light</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/txt_light</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/txt_light</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/txt_light</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        
     </style>
+    
+    <style name="txtStyle">
+        <item name="android:textColor">@color/txt_dark</item>
+        <item name="android:fontFamily">@font/alata</item>
+        <item name="android:backgroundTint">@color/edit_text_bg_light</item>
+    </style>
+
+    <style name="txtStyleJugadores">
+        <item name="android:textColor">@color/txt_light</item>
+        <item name="android:fontFamily">@font/alata</item>
+    </style>
+
+    <style name="mainConstraintStyle">
+        <item name="android:background">@color/contraint_bg_dark</item>
+    </style>
+
+    <style name="btnStyle">
+        <!--<item name="android:textColor">@color/txt_dark</item>-->
+        <item name="android:backgroundTint">@color/button_bg_light</item>
+        <item name="android:fontFamily">@font/alata</item>
+    </style>
+
+    <style name="etStyle">
+        <item name="android:background">@color/edit_text_bg_light</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
 </resources>
